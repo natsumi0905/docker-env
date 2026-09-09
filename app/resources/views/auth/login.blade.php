@@ -56,12 +56,22 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('ログイン') }}
                                 </button>
+                               
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('パスワードをお忘れの方') }}
                                     </a>
                                 @endif
+
+                                 <div class="mt-3 text-center">
+                                    <a href="{{ route('user.signup')}}">
+                                        求職者新規登録
+                                    </a>
+                                    <a href="{{ route('company.signup')}}">
+                                        企業新規登録
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>

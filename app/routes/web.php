@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DisplayController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', [DisplayController::class, 'index']);
+Route::get('/user/signup',[RegistrationController::class, 'userSignup'])->name('user.signup');
+Route::post('/user/signup', [RegistrationController::class, 'userRegister'])->name('user.register');
+Route::get('/company/signup', [RegistrationController::class, 'companySignup'])->name('company.signup');
+Route::post('/company/signup', [RegistrationController::class, 'companyRegister'])->name('company.register');

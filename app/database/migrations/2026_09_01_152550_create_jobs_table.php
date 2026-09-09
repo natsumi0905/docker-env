@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
             $table->string('title',50);
             $table->text('job_description');
             $table->string('location',30);

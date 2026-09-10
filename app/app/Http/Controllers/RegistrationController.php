@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class RegistrationController extends Controller
 {
-    public function userSignup(){
-        return view('auth.user_signup');
-    }
+ 
     public function userRegister(Request $request){
         $user = new User;
 
@@ -19,13 +17,11 @@ class RegistrationController extends Controller
         $user->role = 0;
 
         $user->save();
+        Auth::login($user);
 
-        return redirect('/');
+        return redirect('user_mypage');
     }
 
-    public function companySignup(){
-        return view('company_signup');
-    }
 
     public function companyRegister(Request $request){
         $user = new User;
@@ -36,8 +32,10 @@ class RegistrationController extends Controller
         $user->password = $request->password;
         $user->role = 1;
 
-        $user->save();
 
-        return redirect('/');
+        $user->save();
+        Auth::login($user);
+
+        return redirect('company_mypage');
     }
 }

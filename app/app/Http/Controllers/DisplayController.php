@@ -11,36 +11,22 @@ use Illuminate\Support\Facades\Auth;
 
 class DisplayController extends Controller
 {
-    public function index(){
 
-    $application = new Application;
-    $applications = $application->all();
+
+    public function index()
+{
+    return view('welcome');
+}
 
     //$application_with_user = $application->with('user')->first()->toArray();
     //var_dump($application_with_user);
-    }
-
-    public function companySignup(){
-        return view('company_signup');
-    }
-
-    public function userSignup(){
-        return view('auth.user_signup');
-    }
-
     public function companyMypage(){
+        
         $company = Auth::user();
 
-        return view('company_mypage',[
-            'company'=>$company,
-        ]);
+        return view('company_mypage',compact('company'));
+
     }
 
-      public function userMypage(){
-        $user = Auth::user();
-
-        return view('user_mypage',[
-            'user'=>$user,
-        ]);
-    }
+   
 }

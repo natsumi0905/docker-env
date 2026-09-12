@@ -5,23 +5,28 @@
 <div class="container">
     <div class="card mt-4">
         <div class="border p-4">
-            <div class="row mb-5">
-                    <div div class="text-center mb-4">
-                        {{  $company ->company_name }}　｜　{{  $company ->name }}｜　{{  $company ->tell }}
-                    </div>
+            <div class="text-center mb-4">              
+
+                <a href="{{ route('company.edit') }}" class="btn btn-link">
+                    企業情報編集
+                </a>
+
+                <div class="border p-3">
+                    {{ $company->company_name }}｜{{ $company->name }}｜{{ $company->email }}
+                </div>
+                
             </div>
-
             <div class="text-center mb-4">
-                    <h4>自己PR</h4>
-
-                    <div class="border p-3">
-                    </div>
+                <button type="submit" class="btn btn-primary">
+                  {{ __('新規求人投稿') }}
+                </button>
             </div>
 
             <div class="text-center">
-                    <h4>職務経歴</h4>
-
                     <div class="border p-3">
+                        <a href="#" class="btn btn-link">
+                           編集
+                        </a>
                     </div>
             </div>
 
@@ -30,15 +35,11 @@
             <div class="text-center mt-4">
 
                 <a href="#" class="btn btn-link">
-                    プロフィール編集
+                    ログアウト
                 </a>
 
                 <a href="#" class="btn btn-link">
-                    応募済み求人一覧
-                </a>
-
-                <a href="#" class="btn btn-link">
-                    ブックマーク一覧
+                    退会
                 </a>
 
             </div>

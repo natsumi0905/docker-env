@@ -8,28 +8,14 @@
                 <div class="card-header"></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('company.register') }}">
+                    <form method="POST" action="{{ route('profile.update') }}">
                         @csrf
-                        
-                    <div class="row mb-3">
-                            <label for="company_name" class="col-md-4 col-form-label text-md-end">{{ __('企業名') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="company_name" type="text" class="form-control " name="company_name" required >
-
-                                @error('company_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('担当者名') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end ">{{ __('ユーザー名') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" required >
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$user['name']}}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +29,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('メールアドレス') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$user['email']}}">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -54,26 +40,40 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('パスワード') }}</label>
+                            <label for="tell" class="col-md-4 col-form-label text-md-end">{{ __('電話番号') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="tell" type="text" class="form-control  @error('tell') is-invalid @enderror" name="tell" value="{{$user['tell']}}">
 
-                                @error('password')
+                                @error('tell')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="row mb-3">
-                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-end">{{ __('パスワード確認') }}</label>
+                            <label for="self_pr" class="col-md-4 col-form-label text-md-end">{{ __('自己PR') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="current-password">
+                                <input id="self_pr" type="text" class="form-control" name="self_pr" value="{{$user['self_pr']}}">
 
-                                @error('password_confirmation')
+                                @error('self_pr')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="career" class="col-md-4 col-form-label text-md-end">{{ __('職務経歴') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="career" type="text" class="form-control" name="career" value="{{$user['career']}}">
+
+                                @error('career')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -82,11 +82,10 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class=" text-center">
+                            <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('登録') }}
                                 </button>
-                               
                             </div>
                         </div>
                     </form>

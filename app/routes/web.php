@@ -1,29 +1,27 @@
-    <?php
+<?php
 
-    use Illuminate\Support\Facades\Route;
-    use App\Http\Controllers\DisplayController;
-    use Illuminate\Support\Facades\Auth;
-    use App\Http\Controllers\RegistrationController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\RegistrationController;
+use Illuminate\Support\Facades\Auth;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Web Routes
-    |--------------------------------------------------------------------------
-    |
-    | Here is where you can register web routes for your application. These
-    | routes are loaded by the RouteServiceProvider and all of them will
-    | be assigned to the "web" middleware group. Make something great!
-    |
-    */
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-    Auth::routes();
+Auth::routes();
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    //Route::get('/', [DisplayController::class, 'index']);
-    Route::get('/user/signup',[DisplayController::class, 'userSignup'])->name('user.signup');
-    Route::post('/user/signup', [RegistrationController::class, 'userRegister'])->name('user.register');
-    Route::get('/company/signup', [DisplayController::class, 'companySignup'])->name('company.signup');
-    Route::post('/company/signup', [RegistrationController::class, 'companyRegister'])->name('company.register');
+Route::get('/', [DisplayController::class, 'index']);
+//ログイン時の画面移動
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/company_mypage', [DisplayController::class, 'companyMypage'])->name('/company_mypage');
 
-    Route::get('/user_mypage', [DisplayController::class, 'userMypage'])->name('user.mypage');
-    Route::get('/company_mypage', [DisplayController::class, 'companyMypage'])->name('company.mypage');
+//マイページのプロフィール情報編集、表示と登録
+Route::get('/profile_edit', [RegistrationController::class, 'profileEdit'])->name('profile.edit');
+Route::post('/profile_edit', [RegistrationController::class, 'profileUpdate'])->name('profile.update');
+Route::get('/company_edit', [RegistrationController::class, 'companyEdit'])->name('company.edit');
+Route::post('/company_edit', [RegistrationController::class, 'companyUpdate'])->name('company.update');
+
+

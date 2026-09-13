@@ -53,10 +53,6 @@
                 </a>
 
                 <a href="#" class="btn btn-link">
-                    ログアウト
-                </a>
-
-                <a href="#" class="btn btn-link">
                     退会
                 </a>
 

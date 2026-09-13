@@ -17,26 +17,37 @@
                 
             </div>
             <div class="text-center mb-4">
-                <button type="submit" class="btn btn-primary">
-                  {{ __('新規求人投稿') }}
-                </button>
+                <a href="{{ route('job.create') }}" class="btn btn-primary">
+                   {{ __('新規求人投稿') }}
+                </a>
             </div>
-
+        @foreach($jobs as $job)
             <div class="text-center">
-                    <div class="border p-3">
-                        <a href="#" class="btn btn-link">
+                    <div class="border p-5">
+                        <div class="row align-items-center ">
+                           <div class="profile-picture col-md-4 ">
+                              <img class="img-fluid cursor_pointer" src="{{ $job['image'] }}" alt="Profile Picture">
+                           </div>
+
+                           <div class ="col-md-7">
+                              <p>{{ $company->company_name }}</p>
+                              <h1>{{ $job -> title}}</h1>
+                              <p>{{ $job -> location}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{ $job->salary_range }}</p>
+                           </div>
+                       </div>
+                        <a href="{{ route('job.edit') }}" class="btn btn-link">
                            編集
+                        </a>
+
+                        <a href="#" class="btn btn-link">
+                           応募者一覧
                         </a>
                     </div>
             </div>
-
+        @endforeach
         </div>
 
             <div class="text-center mt-4">
-
-                <a href="#" class="btn btn-link">
-                    ログアウト
-                </a>
 
                 <a href="#" class="btn btn-link">
                     退会

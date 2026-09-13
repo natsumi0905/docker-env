@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\JobController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +25,8 @@ Route::get('/profile_edit', [RegistrationController::class, 'profileEdit'])->nam
 Route::post('/profile_edit', [RegistrationController::class, 'profileUpdate'])->name('profile.update');
 Route::get('/company_edit', [RegistrationController::class, 'companyEdit'])->name('company.edit');
 Route::post('/company_edit', [RegistrationController::class, 'companyUpdate'])->name('company.update');
+
+//企業マイページから新規投稿
+Route::resource('job', JobController::class);
 
 

@@ -23,8 +23,9 @@ class DisplayController extends Controller
     public function companyMypage(){
         
         $company = Auth::user();
+        $jobs = $company->jobs;
 
-        return view('company_mypage',compact('company'));
+        return view('company_mypage',compact('company','jobs'));
 
     }
 

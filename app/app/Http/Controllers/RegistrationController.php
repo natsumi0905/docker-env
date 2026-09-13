@@ -8,7 +8,8 @@ use App\Models\User;
 
 
 class RegistrationController extends Controller
-{
+{ 
+    //一般ユーザープロフィール編集画面表示・編集
     public function profileEdit(){
         
         $user = Auth::user();
@@ -31,7 +32,7 @@ class RegistrationController extends Controller
 
         return redirect('/home');
     }
-
+    //企業プロフィール編集画面表示・編集
     public function companyEdit(){
         
         $user = Auth::user();

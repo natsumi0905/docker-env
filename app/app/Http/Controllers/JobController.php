@@ -62,15 +62,37 @@ class JobController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $job = Job::find($id);
+
+        return view('job_edit',[
+            'job' => $job,
+        ]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {   
+        $job = Job::find($id);
+
+        $job->title = $request->title;
+        $job->job_description = $request->job_description;
+        $job->location = $request->location;
+        $job->employment_type = $request->employment_type;
+        $job->salary_range = $request->salary_range;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('public', $image);
+
+            $job->image ='/storage/'.$image;
+        } 
+
+        $job->save();
+
+        return redirect('company_mypage');
     }
 
     /**
@@ -80,4 +102,12 @@ class JobController extends Controller
     {
         //
     }
+    
+    public function softdeleteJob(Job $job){
+
+        $job->del_flg=1;
+        $job->save();
+
+        return redirect('/company_mypage')->with('successMessage', '削除');;
+     }
 }

@@ -29,4 +29,7 @@ Route::post('/company_edit', [RegistrationController::class, 'companyUpdate'])->
 //企業マイページから新規投稿
 Route::resource('job', JobController::class);
 
+//求人論理削除
+Route::post('/softdelete_job/{job}',[JobController::class,'softdeleteJob'])->name('softdelete.job');
+
 

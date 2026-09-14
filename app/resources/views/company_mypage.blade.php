@@ -35,7 +35,7 @@
                               <p>{{ $job -> location}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{ $job->salary_range }}</p>
                            </div>
                        </div>
-                        <a href="{{ route('job.edit') }}" class="btn btn-link">
+                        <a href="{{ route('job.edit',['job'=>$job['id']]) }}" class="btn btn-link">
                            編集
                         </a>
 

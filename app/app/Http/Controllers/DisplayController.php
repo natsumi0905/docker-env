@@ -23,7 +23,8 @@ class DisplayController extends Controller
     public function companyMypage(){
         
         $company = Auth::user();
-        $jobs = $company->jobs;
+
+        $jobs = $company->jobs->where('del_flg', 0);
 
         return view('company_mypage',compact('company','jobs'));
 

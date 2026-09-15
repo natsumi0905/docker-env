@@ -52,7 +52,7 @@
                     求⼈⼀覧
                 </a>
 
-                <a href="#" class="btn btn-link">
+                <a href="{{ route('withdraw') }}" class="btn btn-link">
                     退会
                 </a>
 

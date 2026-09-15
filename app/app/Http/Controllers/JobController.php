@@ -108,6 +108,6 @@ class JobController extends Controller
         $job->del_flg=1;
         $job->save();
 
-        return redirect('/company_mypage')->with('successMessage', '削除');;
+        return redirect('/company_mypage');
      }
 }

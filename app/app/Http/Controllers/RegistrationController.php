@@ -56,4 +56,25 @@ class RegistrationController extends Controller
         return redirect('/company_mypage');
     }
 
+    //一般ユーザー退会
+    public function withdraw(){
+
+        $user = Auth::user();
+
+        return view('withdraw',[
+            'user' => $user,
+        ]);
+    }
+
+    public function softdeleteUser(){
+
+        $user = Auth::user();
+
+        $user->del_flg=1;
+        $user->save();
+
+        return redirect('/login');
+        
+     }
+
 }

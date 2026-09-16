@@ -49,7 +49,7 @@
 
             <div class="text-center mt-4">
 
-                <a href="#" class="btn btn-link">
+                <a href="{{ route('withdraw') }}" class="btn btn-link">
                     退会
                 </a>
 

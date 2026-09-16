@@ -19,7 +19,7 @@
 
                   <div class="row mb-0">
                             <div class="text-center">
-                                <a href="#"class="btn btn-danger">
+                                <a href="{{ route('withdraw.cancel') }}"class="btn btn-danger">
                                     {{ __('キャンセル') }}
                                 </a>
                             </div>

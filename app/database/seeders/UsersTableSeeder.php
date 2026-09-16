@@ -22,6 +22,15 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now(),
+        ],
+
+        [
+            'name' => '企業登録者2',
+            'email' => 'company2@iclou.com',
+            'password' => Hash::make('password'),
+            'role' => 1,
+            'created_at'=> Carbon::now(),
+            'updated_at'=> Carbon::now(),
         ]);
         
     }

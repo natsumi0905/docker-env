@@ -56,7 +56,7 @@ class RegistrationController extends Controller
         return redirect('/company_mypage');
     }
 
-    //一般ユーザー退会
+    //ユーザー退会
     public function withdraw(){
 
         $user = Auth::user();
@@ -72,9 +72,23 @@ class RegistrationController extends Controller
 
         $user->del_flg=1;
         $user->save();
-
+        
+        Auth::logout();
         return redirect('/login');
         
      }
+
+    //ユーザー退会キャンセル
+    public function withdrawCancel(){
+
+        $user = Auth::user();
+
+        if($user->role==0){
+            return redirect('/home');
+        }
+        if($user->role==1){
+            return redirect('/company_mypage');
+        }
+    }
 
 }

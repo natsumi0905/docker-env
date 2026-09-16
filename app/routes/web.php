@@ -34,5 +34,5 @@ Route::post('/softdelete_job/{job}',[JobController::class,'softdeleteJob'])->nam
 //退会処理
 Route::get('/withdraw', [RegistrationController::class, 'withdraw'])->name('withdraw');
 Route::post('/softdelete_user',[RegistrationController::class,'softdeleteUser'])->name('softdelete.user');
-
+Route::get('/cancel', [RegistrationController::class, 'withdrawCancel'])->name('withdraw.cancel');
 

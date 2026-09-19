@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Job;
 
 
 class RegistrationController extends Controller
@@ -89,6 +90,18 @@ class RegistrationController extends Controller
         if($user->role==1){
             return redirect('/company_mypage');
         }
+    }
+    
+    //求人検索画面
+    public function jobSearch(){
+        
+        $user = Auth::user();
+        $job = Job::where('del_flg', 0)->get();
+                
+        return view('job_search',[
+            'user' => $user,
+            'jobs' => $job,
+        ]);
     }
 
 }

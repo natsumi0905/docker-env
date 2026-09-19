@@ -48,7 +48,7 @@
             </div>
              <div class="text-center mt-4">
 
-                <a href="#" class="btn btn-link">
+                <a href="{{ route('job.search') }}" class="btn btn-link">
                     求⼈⼀覧
                 </a>
 

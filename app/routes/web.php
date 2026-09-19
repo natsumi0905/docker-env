@@ -35,4 +35,5 @@ Route::post('/softdelete_job/{job}',[JobController::class,'softdeleteJob'])->nam
 Route::get('/withdraw', [RegistrationController::class, 'withdraw'])->name('withdraw');
 Route::post('/softdelete_user',[RegistrationController::class,'softdeleteUser'])->name('softdelete.user');
 Route::get('/cancel', [RegistrationController::class, 'withdrawCancel'])->name('withdraw.cancel');
-
+//求人検索画面
+Route::get('/search',[RegistrationController::class,'jobSearch'])->name('job.search');

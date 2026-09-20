@@ -37,11 +37,11 @@
                     プロフィール編集
                 </a>
 
-                <a href="#" class="btn btn-link">
+                <a href="{{ route('application.list') }}" class="btn btn-link">
                     応募済み求人一覧
                 </a>
 
-                <a href="#" class="btn btn-link">
+                <a href="{{ route('bookmark.list') }}" class="btn btn-link">
                     ブックマーク一覧
                 </a>
 

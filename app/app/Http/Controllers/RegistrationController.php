@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Job;
+use App\Models\Application;
+use App\Models\Bookmark;
 
 
 class RegistrationController extends Controller
@@ -103,5 +105,74 @@ class RegistrationController extends Controller
             'jobs' => $job,
         ]);
     }
+    
+    //求人検索画面詳細
+    public function jobDetail($id){
+        
+        $job=job::find($id);
+        $user = Auth::user();
 
+        $bookmark = Bookmark::where('user_id', $user->id)->where('job_id', $job->id)->first();
+
+        return view('job_detail',compact('job','user','bookmark'));
+    }
+    
+    public function applicationForm($id){
+
+        $job = Job::find($id);
+        $user = Auth::user();
+
+        return view('application_form',compact('job','user'));
+    }
+
+    public function applicationStore(Request $request, $id){
+        
+        $user = Auth::user();
+
+        $application = new Application();
+
+        $application->job_id = $id;
+        $application->motivation = $request->motivation;
+        $application->email = $request->email;
+        $application->tell = $request->tell;
+        $application->status = 0;
+        $application->user_id = $user -> id;
+
+        $application ->save();
+
+        return redirect('home');
+
+    }
+    
+    //求人応募済一覧
+    public function applicationList(){
+
+        $applications = Auth::user()->applications()->with('job')->get();
+
+        return view('application_list',compact('applications'));
+    }
+
+    
+    //求人ブックマーク機能
+    public function bookmark(Request $request, $id){
+        
+        $user = Auth::user();
+
+        $bookmark = new Bookmark();
+
+        $bookmark->job_id = $id;
+        $bookmark->user_id = $user -> id;
+
+        $bookmark ->save();
+
+        return redirect()->back();
+
+    }
+    //ブックマーク済一覧
+    public function bookmarkList(){
+
+        $bookmarks = Auth::user()->bookmarks()->with('job')->get();
+
+        return view('book',compact('bookmarks'));
+    }
 }

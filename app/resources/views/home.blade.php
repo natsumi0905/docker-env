@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="col-md-4 text-end">
-                        応募合計　｜　通過合計
+                        応募合計：{{ $count }}　｜　通過合計：{{$passcount}}
                     </div>
             </div>
 

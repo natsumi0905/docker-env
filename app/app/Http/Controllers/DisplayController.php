@@ -23,8 +23,12 @@ class DisplayController extends Controller
     public function companyMypage(){
         
         $company = Auth::user();
-
         $jobs = $company->jobs->where('del_flg', 0);
+
+        foreach($jobs as $job){
+            $job->count_company =  Application::where('job_id', $job->id)->count();
+            $job->passcount_company = Application::where('job_id', $job->id)->whereIn('status',[1,2])->count();
+        }
 
         return view('company_mypage',compact('company','jobs'));
 

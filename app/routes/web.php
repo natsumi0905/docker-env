@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('/', [DisplayController::class, 'index']);
 //ログイン時の画面移動
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user_mypage');
-Route::get('/company_mypage', [DisplayController::class, 'companyMypage'])->name('/company_mypage');
+Route::get('/company_mypage', [DisplayController::class, 'companyMypage'])->name('company_mypage');
 
 //マイページのプロフィール情報編集、表示と登録
 Route::get('/profile_edit', [RegistrationController::class, 'profileEdit'])->name('profile.edit');
@@ -54,3 +54,9 @@ Route::post('/bookmark/{id}',[RegistrationController::class,'bookmark'])->name('
 //ブックマーク一覧表示
 Route::get('/bookmark_list',[RegistrationController::class,'bookmarkList'])->name('bookmark.list');
 
+//企業側応募者一覧
+Route::get('/applicant_list/{id}',[RegistrationController::class,'applicantList'])->name('applicant.list');
+
+//応募者ステータス変更画面
+Route::get('/applicant_detail/{id}',[RegistrationController::class,'applicantDetail'])->name('applicant.detail');
+Route::post('/applicant_edit/{id}',[RegistrationController::class,'applicantEdit'])->name('applicant.edit');

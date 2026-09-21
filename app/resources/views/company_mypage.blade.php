@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="card mt-4">
-        <div class="border p-4">
+        <div class="card-body p-4">
             <div class="text-center mb-4">              
 
                 <a href="{{ route('company.edit') }}" class="btn btn-link">
@@ -22,24 +22,26 @@
                 </a>
             </div>
         @foreach($jobs as $job)
-            <div class="text-center">
-                    <div class="border p-5">
+            <div class="card mb-2 text-center">
+                    <div class="border p-4">
                         <div class="row align-items-center ">
-                           <div class="profile-picture col-md-4 ">
+                           <div class="profile-picture col-md-3">
                               <img class="img-fluid cursor_pointer" src="{{ $job['image'] }}" alt="Profile Picture">
                            </div>
-
-                           <div class ="col-md-7">
+                           <div class ="col-md-6">
                               <p>{{ $company->company_name }}</p>
                               <h1>{{ $job -> title}}</h1>
                               <p>{{ $job -> location}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{ $job->salary_range }}</p>
+                           </div>
+                           <div class="col-md-3 text-end">
+                              応募合計：{{ $job->count_company }}　｜　通過合計：{{$job->passcount_company}}
                            </div>
                        </div>
                         <a href="{{ route('job.edit',['job'=>$job['id']]) }}" class="btn btn-link">
                            編集
                         </a>
 
-                        <a href="#" class="btn btn-link">
+                        <a href="{{ route('applicant.list',['id' => $job->id]) }}" class="btn btn-link">
                            応募者一覧
                         </a>
                     </div>
@@ -47,7 +49,7 @@
         @endforeach
         </div>
 
-            <div class="text-center mt-4">
+            <div class="text-center ">
 
                 <a href="{{ route('withdraw') }}" class="btn btn-link">
                     退会

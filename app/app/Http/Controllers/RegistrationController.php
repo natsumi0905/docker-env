@@ -27,6 +27,8 @@ class RegistrationController extends Controller
 
         $columns = ['name','email','tell','self_pr','career'];
 
+        $Count =  Application::where('user_id', 'Auth::user()')->count();
+
         foreach($columns as $column){
             $user->$column = $request->$column;
         }
@@ -56,7 +58,7 @@ class RegistrationController extends Controller
 
         $user->save();
 
-        return redirect('/company_mypage');
+        return redirect('company_mypage');
     }
 
     //ユーザー退会
@@ -175,4 +177,35 @@ class RegistrationController extends Controller
 
         return view('book',compact('bookmarks'));
     }
+
+    
+       //応募者一覧
+    public function applicantList($id){
+        $job = Job::find($id);
+
+        $applications = Application::where('job_id',$job->id)->with('user')->get();
+
+
+        return view('applicant_list',compact('applications'));
+    }
+
+    //応募者ステータス変更
+    public function  applicantDetail($id){
+
+        $application = Application::with('user', 'job')->find($id);
+
+
+        return view('applicant_detail',compact('application'));
+    }
+
+    public function  applicantEdit(Request $request, $id){
+
+        $application = Application::find($id);
+
+        $application->status = $request -> application_status;
+
+        $application ->save();
+        return redirect()->route('applicant.list', ['id' => $application->job_id]);
+    }
+
 }

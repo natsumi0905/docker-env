@@ -27,7 +27,6 @@ class RegistrationController extends Controller
 
         $columns = ['name','email','tell','self_pr','career'];
 
-        $Count =  Application::where('user_id', 'Auth::user()')->count();
 
         foreach($columns as $column){
             $user->$column = $request->$column;
@@ -97,14 +96,49 @@ class RegistrationController extends Controller
     }
     
     //求人検索画面
-    public function jobSearch(){
+    public function jobSearch(Request $request){
         
         $user = Auth::user();
-        $job = Job::where('del_flg', 0)->get();
+
+        $keyword = $request->input('keyword');
+        $location = $request->input('location');
+        $employmentType = $request->input('employment_type');
+        $salaryRange = $request->input('salary_range');
+        
+        $query = Job::where('del_flg', 0);
+        
+        //検索機能↓
+        if(!empty($keyword)) {
+            $query->where(function ($query)use($keyword){
+                $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('job_description', 'LIKE', "%{$keyword}%")
+                ->orWhereHas('user', function ($query) use ($keyword){
+                    $query->where('company_name', 'LIKE', "%{$keyword}%");
+                });
+            });
+        }
+
+        if($location !== null && $location !== '') {
+            $query->where('location',  $location);
+        }
+
+        if($employmentType !== null && $employmentType !== '') {
+            $query->where('employment_type',$employmentType);
+        }
+
+        if($salaryRange !== null && $salaryRange !== '') {
+            $query->where('salary_range',  $salaryRange);
+        }
+
+        $job = $query->get();
                 
         return view('job_search',[
             'user' => $user,
             'jobs' => $job,
+            'keyword' => $keyword,
+            'location' => $location,
+            'employmentType' => $employmentType,
+            'salaryRange' => $salaryRange,
         ]);
     }
     
@@ -114,7 +148,11 @@ class RegistrationController extends Controller
         $job=job::find($id);
         $user = Auth::user();
 
-        $bookmark = Bookmark::where('user_id', $user->id)->where('job_id', $job->id)->first();
+        $bookmark = null;
+        
+        if(Auth::check()){
+          $bookmark = Bookmark::where('user_id', $user->id)->where('job_id', $job->id)->first();
+        }
 
         return view('job_detail',compact('job','user','bookmark'));
     }
@@ -149,7 +187,9 @@ class RegistrationController extends Controller
     //求人応募済一覧
     public function applicationList(){
 
-        $applications = Auth::user()->applications()->with('job')->get();
+        $applications = Auth::user()->applications()->whereHas('job', function ($query) {
+            $query->where('del_flg', 0);
+        })->with('job')->get();
 
         return view('application_list',compact('applications'));
     }

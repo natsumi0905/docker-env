@@ -32,7 +32,15 @@
                             <label for="location" class="col-md-4 col-form-label text-md-end">{{ __('勤務地') }}</label>
 
                             <div class="col-md-6">
-                                <input id="location" type="text" class="form-control"  name="location" value="{{$job['location']}}">
+                                <select name='location' class='form-control' >
+                                    @foreach (Config::get('workplace_type') as $key => $val)
+                                     @if($key == $job['location'])
+                                       <option value="{{ $key }}" selected>{{ $val }}</option>
+                                     @else
+                                     <option value="{{ $key }}">{{ $val }}</option>
+                                     @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -56,7 +64,16 @@
                             <label for="salary_range" class="col-md-4 col-form-label text-md-end">{{ __('給与レンジ') }}</label>
 
                             <div class="col-md-6">
-                                <input id="salary_range" type="text" class="form-control" name="salary_range" value="{{$job['salary_range']}}">
+                                <select name='salary_range' class='form-control' >
+                                    <option value="" hidden>選択してください</option>
+                                    @foreach (Config::get('salary_type') as $key => $val)
+                                     @if($key == $job['salary_range'])
+                                       <option value="{{ $key }}" selected>{{ $val }}</option>
+                                     @else
+                                     <option value="{{ $key }}">{{ $val }}</option>
+                                     @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

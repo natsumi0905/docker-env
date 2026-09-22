@@ -69,6 +69,12 @@
                                         新規登録
                                     </a>
                                 </div>
+
+                                <div class="mt-3 text-center">
+                                    <a href="{{ route('job.search')}}">
+                                        求人一覧
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>

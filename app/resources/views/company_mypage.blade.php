@@ -31,7 +31,7 @@
                            <div class ="col-md-6">
                               <p>{{ $company->company_name }}</p>
                               <h1>{{ $job -> title}}</h1>
-                              <p>{{ $job -> location}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{ $job->salary_range }}</p>
+                              <p>{{ Config::get('workplace_type')[$job->location]}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{ Config::get('salary_type')[$job->salary_range] }}</p>
                            </div>
                            <div class="col-md-3 text-end">
                               応募合計：{{ $job->count_company }}　｜　通過合計：{{$job->passcount_company}}

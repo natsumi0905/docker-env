@@ -27,8 +27,14 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        $count =  Application::where('user_id', Auth::id())->count();
-        $passcount = Application::where('user_id', Auth::id())->whereIn('status',[1,2])->count();
+        $count =  Application::where('user_id', Auth::id())->whereHas('job', function ($query){
+            $query->where('del_flg', 0);
+        })->count();
+        
+        $passcount = Application::where('user_id', Auth::id())->whereHas('job', function ($query){
+            $query->where('del_flg', 0);
+        })
+        ->whereIn('status',[1,2])->count();
 
         return view('home', compact('user','count','passcount'));
     }

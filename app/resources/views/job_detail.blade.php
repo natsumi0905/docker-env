@@ -13,7 +13,7 @@
                 <div class ="col-md-6">
                     <p>{{ $job ->user->company_name }}</p>
                     <h1>{{ $job -> title}}</h1>
-                    <p>{{ $job -> location}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{ $job->salary_range }}</p>
+                    <p>{{ Config::get('workplace_type')[$job->location]}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{Config::get('salary_type')[$job->salary_range]}}</p>
                 </div>
                 <div class="col-md-2 ">
                     @if ($bookmark)

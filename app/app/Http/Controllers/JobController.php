@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
+use App\Http\Requests\JobRequest;
+
 
 class JobController extends Controller
 {
@@ -27,7 +29,7 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JobRequest $request)
     {
         $job = new Job;
 
@@ -73,7 +75,7 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JobRequest $request, string $id)
     {   
         $job = Job::find($id);
 

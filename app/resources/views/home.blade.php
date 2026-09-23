@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="card mt-4">
-        <div class="border p-4">
+        <div class="card-body">
             <div class="row mb-5">
                     <div class="col-md-8">
                        {{ $user->name }}｜{{ $user->email }}｜{{ $user->tell }} 

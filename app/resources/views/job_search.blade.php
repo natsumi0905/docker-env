@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+ 
+<div class=" text-end mb-3 col-11">
+    <a href="{{ route('user_mypage') }}">
+       {{ __('→マイページに戻る') }}
+    </a>
+</div>
+
  <div class="search">
         <form action="{{ route('job.search') }}" method="GET">
 

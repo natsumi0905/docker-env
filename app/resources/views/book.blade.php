@@ -17,7 +17,7 @@
                            <div class ="col-md-7">
                               <p>{{ $bookmark->job->user->company_name}}</p>
                               <h1>{{ $bookmark ->job-> title}}</h1>
-                              <p>{{ Config::get('workplace_type')[$bookmark->job->location]}}｜{{ Config::get('employment_type')[$bookmark->job->employment_type] }}｜{{ $bookmark->job->salary_range }}</p>
+                              <p>{{ Config::get('workplace_type')[$bookmark->job->location]}}｜{{ Config::get('employment_type')[$bookmark->job->employment_type] }}｜{{  Config::get('salary_type')[$bookmark->job->salary_range]  }}</p>
                            </div>
                        </div>
                         </div>

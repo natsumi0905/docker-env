@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Job;
 use App\Models\Application;
 use App\Models\Bookmark;
-
+use App\Http\Requests\CreateData;
+use App\Http\Requests\CompanyProfileRequest;
+use App\Http\Requests\ApplicationRequest;
 
 class RegistrationController extends Controller
 { 
@@ -22,7 +25,7 @@ class RegistrationController extends Controller
         ]);
     }
 
-    public function profileUpdate(Request $request){
+    public function profileUpdate(CreateData $request){
         $user = Auth::user();
 
         $columns = ['name','email','tell','self_pr','career'];
@@ -46,7 +49,7 @@ class RegistrationController extends Controller
         ]);
     }
 
-    public function companyUpdate(Request $request){
+    public function companyUpdate(CompanyProfileRequest $request){
         $user = Auth::user();
 
         $columns = ['company_name','name','email'];
@@ -162,10 +165,13 @@ class RegistrationController extends Controller
         $job = Job::find($id);
         $user = Auth::user();
 
-        return view('application_form',compact('job','user'));
+        $application = Application::where('user_id',$user->id)
+        ->where('job_id',$id)->exists();
+
+        return view('application_form',compact('job','user','application'));
     }
 
-    public function applicationStore(Request $request, $id){
+    public function applicationStore(ApplicationRequest $request, $id){
         
         $user = Auth::user();
 
@@ -177,6 +183,7 @@ class RegistrationController extends Controller
         $application->tell = $request->tell;
         $application->status = 0;
         $application->user_id = $user -> id;
+
 
         $application ->save();
 
@@ -207,13 +214,33 @@ class RegistrationController extends Controller
 
         $bookmark ->save();
 
-        return redirect()->back();
+        return response()->json([
+           'message' => 'ブックマークしました',
+           'bookmark' => $bookmark
+        ]);
+        
 
+    }
+    public function bookmarkCancel(Request $request, $id){
+        
+        $user = Auth::user();
+
+        $bookmark = Bookmark::where('job_id',$id)->where('user_id',$user->id)->first();
+
+        $bookmark ->delete();
+
+        return response()->json([
+           'message' => 'ブックマークを解除しました',
+           'bookmark' => $bookmark
+        ]);
+        
     }
     //ブックマーク済一覧
     public function bookmarkList(){
 
-        $bookmarks = Auth::user()->bookmarks()->with('job')->get();
+        $bookmarks = Auth::user()->bookmarks()->whereHas('job',function($query){
+            $query->where('del_flg', 0);
+        })->with('job')->get();
 
         return view('book',compact('bookmarks'));
     }

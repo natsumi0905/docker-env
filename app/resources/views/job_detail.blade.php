@@ -17,17 +17,54 @@
                 </div>
                 <div class="col-md-2 ">
                     @if ($bookmark)
-                    <button type="button" class="btn btn-primary">
+                    <button id="btn" onclick="handleCancel()" class="btn btn-primary">
                         ★
                     </button>
                     @else
-                    <form method=POST action="{{route('bookmark', ['id' => $job->id])}}">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-primary">
+                    <button id="btn" onclick="handleClick()" class="btn btn-outline-primary">
                       ☆
                     </button >
-                    </form>
-                    @endif
+                     @endif
+
+                    <script>function handleCancel(){
+                      const token = document.querySelector('meta[name="csrf-token"]').content;
+
+                      fetch('/bookmark/cancel/{{ $job->id }}',{
+                        method: 'POST',
+                        headers:{
+                            'Content-Type':"application/json; charset=utf-8",
+                            'X-CSRF-TOKEN': token,
+                        },
+                      }).then(res => res.json()).then(json =>{
+                        const html = json.message;
+                        console.log(json.message);
+                        const btn= document.getElementById('btn');
+                        btn.textContent = ' ☆';
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-primary');
+                        btn.setAttribute('onclick', 'handleClick()');
+                       })
+                    }</script>
+                    <script>function handleClick(){
+                      const token = document.querySelector('meta[name="csrf-token"]').content;
+
+                      fetch('/bookmark/{{ $job->id }}',{
+                        method: 'POST',
+                        headers:{
+                            'Content-Type':"application/json; charset=utf-8",
+                            'X-CSRF-TOKEN': token,
+                        },
+                      }).then(res => res.json()).then(json =>{
+                        const html = json.message;
+                        console.log(json.message);
+                        const btn= document.getElementById('btn');
+                        btn.textContent = '★';
+                        btn.classList.remove('btn-outline-primary');
+                        btn.classList.add('btn-primary');
+                        btn.setAttribute('onclick', 'handleCancel()');
+                       })
+                    }</script>
+                    
                 </div>
 
                 <div class ="text-center">

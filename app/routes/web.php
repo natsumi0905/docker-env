@@ -43,8 +43,9 @@ Route::middleware(['role:0'])->group(function(){
     //応募済一覧
     Route::get('/application_list',[RegistrationController::class,'applicationList'])->name('application.list');
 
-    //ブックマーク機能、DB保存
+    //ブックマーク機能、DB保存,解除
     Route::post('/bookmark/{id}',[RegistrationController::class,'bookmark'])->name('bookmark');
+    Route::post('/bookmark/cancel/{id}',[RegistrationController::class,'bookmarkCancel'])->name('bookmark.cancel');
 
     //ブックマーク一覧表示
     Route::get('/bookmark_list',[RegistrationController::class,'bookmarkList'])->name('bookmark.list');

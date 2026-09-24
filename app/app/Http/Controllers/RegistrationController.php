@@ -200,15 +200,57 @@ class RegistrationController extends Controller
 
         return view('application_list',compact('applications'));
     }
+    
+
+    //求人応募内容編集
+    public function applicationDetail($id){
+
+        $application  = Auth::user()->applications->where('id',$id)->first();
+
+
+        return view('application_detail',compact('application'));
+    }
+    public function applicationUpdate(ApplicationRequest $request,int $id){
+
+        $application  = Auth::user()->applications->where('id',$id)->first();
+
+        $columns = ['motivation','email','tell'];
+
+        foreach($columns as $column){
+            $application->$column = $request->$column;
+        }
+
+        $application->save();
+
+        return redirect('/application_list');
+    }
+
+    //求人応募削除
+    public function applicationDelete(int $id){
+
+        $user = Auth::user();
+
+        $application = Application::where('id',$id)->where('user_id',$user->id)->first();
+        
+        $application->delete();
+
+        return redirect('/application_list');
+    }
 
     
     //求人ブックマーク機能
     public function bookmark(Request $request, $id){
-        
+
+        if (!Auth::check()) {
+        return response()->json([
+            'login' => true
+        ]);
+        }
+
         $user = Auth::user();
 
         $bookmark = new Bookmark();
-
+        
         $bookmark->job_id = $id;
         $bookmark->user_id = $user -> id;
 
@@ -247,7 +289,7 @@ class RegistrationController extends Controller
 
     
        //応募者一覧
-    public function applicantList($id){
+    public function applicantList(int $id){
         $job = Job::find($id);
 
         $applications = Application::where('job_id',$job->id)->with('user')->get();
@@ -257,7 +299,7 @@ class RegistrationController extends Controller
     }
 
     //応募者ステータス変更
-    public function  applicantDetail($id){
+    public function  applicantDetail(int $id){
 
         $application = Application::with('user', 'job')->find($id);
 

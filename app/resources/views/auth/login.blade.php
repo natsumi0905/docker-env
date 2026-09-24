@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -39,17 +38,6 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -64,17 +52,13 @@
                                     </a>
                                 @endif
 
-                                 <div class="mt-3 text-center">
-                                    <a href="{{ route('register')}}">
-                                        新規登録
-                                    </a>
-                                </div>
+                            </div>
 
-                                <div class="mt-3 text-center">
+                            <div class=" row mt-3 text-center">
+
                                     <a href="{{ route('job.search')}}">
-                                        求人一覧
+                                        ログインせずに求人を見る
                                     </a>
-                                </div>
                             </div>
                         </div>
                     </form>

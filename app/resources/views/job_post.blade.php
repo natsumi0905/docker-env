@@ -114,6 +114,11 @@
                     </form>
                 </div>
             </div>
+            <div class="text-center mt-4">
+                <a href="{{ route('company_mypage') }}">
+                    {{ __('マイページに戻る') }}
+                </a>
+            </div>
         </div>
     </div>
 </div>

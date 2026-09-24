@@ -6,7 +6,7 @@
     <div class="card mt-2">
         <div class="border p-4">
         @foreach($applications as $application)
-                <a href="{{route('job.detail',['id'=> $application->job->id])}}" class="card mb-3">
+                <a href="{{route('application.detail',['id'=> $application->id])}}" class="card mb-3">
                     <div class="text-center">
                         <div class="card-body">
                             <div class="row align-items-center ">

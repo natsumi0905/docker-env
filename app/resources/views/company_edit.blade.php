@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('company.update') }}">
@@ -63,6 +62,11 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ route('company_mypage') }}">
+                    {{ __('マイページに戻る') }}
+                </a>
             </div>
         </div>
     </div>

@@ -55,8 +55,14 @@
                             'X-CSRF-TOKEN': token,
                         },
                       }).then(res => res.json()).then(json =>{
-                        const html = json.message;
+
+                      if (json.login) {
+                            window.location.href = '/login';
+                            return;
+                        }
+                        
                         console.log(json.message);
+                        
                         const btn= document.getElementById('btn');
                         btn.textContent = '★';
                         btn.classList.remove('btn-outline-primary');

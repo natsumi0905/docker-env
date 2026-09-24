@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('job.update',['job' => $job['id']]) }}" enctype="multipart/form-data" >
@@ -117,7 +116,7 @@
                     
                         <div class="text-center  d-flex justify-content-center ">
                                 <button type="submit" class="btn btn-primary me-4">
-                                    {{ __('登録') }}
+                                    {{ __('更新') }}
                                 </button>
                            
                     </form>
@@ -129,6 +128,11 @@
                                 </form>
                         </div>
                 </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ route('company_mypage') }}">
+                    {{ __('マイページに戻る') }}
+                </a>
             </div>
         </div>
     </div>

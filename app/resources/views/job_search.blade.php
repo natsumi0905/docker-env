@@ -24,7 +24,7 @@
                     <div>
                         <label for="">勤務地
                         <select name='location' >
-                            <option value="" hidden>　</option>
+                            <option value="" >指定なし</option>
                              @foreach (Config::get('workplace_type') as $key => $val)
                             <option value="{{ $key }}">{{ $val }}</option>
                             @endforeach
@@ -37,9 +37,9 @@
                     <div>
                         <label for="">雇用形態
                         <select name='employment_type' >
-                            <option value="" hidden>　</option>
+                            <option value="" >指定なし</option>
                             @foreach (Config::get('employment_type') as $key => $val)
-                            <option value="{{ $key }}">{{ $val }}</option>
+                            <option value="{{ $key }}" >{{ $val }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -50,7 +50,7 @@
                     <div>
                         <label for="">給与レンジ
                         <select name='salary_range' >
-                            <option value="" hidden>　</option>
+                            <option value="" hidden>指定なし</option>
                             @foreach (Config::get('salary_type') as $key => $val)
                             <option value="{{ $key }}">{{ $val }}</option>
                              @endforeach

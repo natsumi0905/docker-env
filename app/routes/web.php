@@ -24,6 +24,9 @@ Route::get('/search',[RegistrationController::class,'jobSearch'])->name('job.sea
 //求人検索画面→カードクリック詳細
 Route::get('/job_detail/{id}',[RegistrationController::class,'jobDetail'])->name('job.detail');
 
+//ブックマーク機能
+Route::post('/bookmark/{id}',[RegistrationController::class,'bookmark'])->name('bookmark');
+
 
 Route::group(['middleware'=>'auth'],function(){
 
@@ -43,12 +46,18 @@ Route::middleware(['role:0'])->group(function(){
     //応募済一覧
     Route::get('/application_list',[RegistrationController::class,'applicationList'])->name('application.list');
 
+    //応募内容編集
+    Route::get('/application_detail/{id}',[RegistrationController::class,'applicationDetail'])->name('application.detail');
+    Route::post('/application_update/{id}',[RegistrationController::class,'applicationUpdate'])->name('application.update');
+
+    //応募削除
+    Route::post('/application_delete/{id}',[RegistrationController::class,'applicationDelete'])->name('application.delete');
     //ブックマーク機能、DB保存,解除
-    Route::post('/bookmark/{id}',[RegistrationController::class,'bookmark'])->name('bookmark');
     Route::post('/bookmark/cancel/{id}',[RegistrationController::class,'bookmarkCancel'])->name('bookmark.cancel');
 
     //ブックマーク一覧表示
     Route::get('/bookmark_list',[RegistrationController::class,'bookmarkList'])->name('bookmark.list');
+    
 });
 
 //企業ユーザー

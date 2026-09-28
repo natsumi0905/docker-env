@@ -32,13 +32,25 @@
 <div class="row mb-3">
     <label for="application_status" class="col-md-4 col-form-label text-md-end">応募ステータス</label>
         <div class="col-md-6">
-               <select name='application_status' class='form-control' id="application_status" >  
+               <select name="application_status" class="form-control  @error('application_status') is-invalid @enderror" id="application_status" >  
                 <option value="" hidden>選択してください</option>  
-                     @foreach (Config::get('application_status') as $key => $val)
-                <option value="{{ $key }}">{{ $val }}</option>
-                     @endforeach
+                @foreach (Config::get('application_status') as $key => $val)
+                @if($key == $application['status'])
+                   <option value="{{ $key }}" selected>{{ $val }}</option>
+                @else
+                   <option value="{{ $key }}">{{ $val }}</option>
+                @endif
+                @endforeach
                </select>
+                @error('application_status')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+
         </div>
+
+        
         <div class="text-center mt-2">
                 <div class="text-center">
                      <button type="submit" class="btn btn-primary">

@@ -66,6 +66,14 @@ class JobController extends Controller
     {
         $job = Job::find($id);
 
+        if(is_null($job)){
+            abort(404);
+        }
+
+        if ($job->user_id !== Auth::id()) {
+        abort(403, 'アクセス権限がありません。');
+        }
+
         return view('job_edit',[
             'job' => $job,
         ]);
@@ -78,6 +86,14 @@ class JobController extends Controller
     public function update(JobRequest $request, string $id)
     {   
         $job = Job::find($id);
+
+        if(is_null($job)){
+            abort(404);
+        }
+
+        if ($job->user_id !== Auth::id()) {
+        abort(403, 'アクセス権限がありません。');
+        }
 
         $job->title = $request->title;
         $job->job_description = $request->job_description;

@@ -23,7 +23,8 @@ class CreateData extends FormRequest
     {
         return [
             'name'=>'required',
-            'email'=>'required | email'
+            'email'=>'required | email',
+            'tell'=> 'digits_between:8,11'
         ];
     }
 }

@@ -16,21 +16,32 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => '企業登録者',
+        [    
+            'name' => '企業ユーザー1',
             'email' => 'company@iclou.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('siro1220'),
             'role' => 1,
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now(),
         ],
 
         [
-            'name' => '企業登録者2',
+            'name' => '企業ユーザー2',
             'email' => 'company2@iclou.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('siro1220'),
             'role' => 1,
             'created_at'=> Carbon::now(),
             'updated_at'=> Carbon::now(),
+        ],
+        
+        [
+            'name' => '企業ユーザー3',
+            'email' => 'company3@iclou.com',
+            'password' => Hash::make('siro1220'),
+            'role' => 1,
+            'created_at'=> Carbon::now(),
+            'updated_at'=> Carbon::now(),
+        ]
         ]);
         
     }

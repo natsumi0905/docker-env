@@ -43,7 +43,7 @@ return [
     'declined_if' => 'The :attribute field must be declined when :other is :value.',
     'different' => 'The :attribute field and :other must be different.',
     'digits' => 'The :attribute field must be :digits digits.',
-    'digits_between' => 'The :attribute field must be between :min and :max digits.',
+    'digits_between' => ':attributeは数字のみの8桁から11桁で入力してください。',
     'dimensions' => 'The :attribute field has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
     'doesnt_end_with' => 'The :attribute field must not end with one of the following: :values.',
@@ -198,7 +198,8 @@ return [
         'image'=>'画像',
         'motivation'=>'志望動機',
         'tell'=>'電話番号',
-        'email'=>'メールアドレス'
+        'email'=>'メールアドレス',
+        'application_status'=>'ステータス'
     ],
 
 ];

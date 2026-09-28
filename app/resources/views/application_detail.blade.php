@@ -59,16 +59,16 @@
                               
                             <form action="{{ route('application.delete',['id'=>$application['id']]) }}" method="POST" >
                                 @csrf
-                                <button type="submit" class="btn btn-danger"  onclick='return confirm("本当に応募を取り消しますか？")'>
-                                    {{ __('応募削除') }}
+                                <button type="submit" class="btn btn-danger"  onclick='return confirm("本当に応募をキャンセルしますか？")'>
+                                    {{ __('応募をキャンセル') }}
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
                         <div class="text-center mt-4">
-                           <a href="{{ route('user_mypage') }}">
-                             {{ __('マイページに戻る') }}
+                           <a href="{{ route('application.list') }}">
+                             {{ __('応募済求人一覧に戻る') }}
                            </a>
                         </div>
             </div>

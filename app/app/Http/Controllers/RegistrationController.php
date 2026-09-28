@@ -12,6 +12,7 @@ use App\Models\Bookmark;
 use App\Http\Requests\CreateData;
 use App\Http\Requests\CompanyProfileRequest;
 use App\Http\Requests\ApplicationRequest;
+use App\Http\Requests\ApplicationStatus;
 
 class RegistrationController extends Controller
 { 
@@ -146,10 +147,14 @@ class RegistrationController extends Controller
     }
     
     //求人検索画面詳細
-    public function jobDetail($id){
+    public function jobDetail(int $id){
         
         $job=job::find($id);
         $user = Auth::user();
+
+        if(is_null($job)){
+            abort(404);
+        }
 
         $bookmark = null;
         
@@ -160,10 +165,14 @@ class RegistrationController extends Controller
         return view('job_detail',compact('job','user','bookmark'));
     }
     
-    public function applicationForm($id){
+    public function applicationForm(int $id){
 
         $job = Job::find($id);
         $user = Auth::user();
+
+        if(is_null($job)){
+            abort(404);
+        }
 
         $application = Application::where('user_id',$user->id)
         ->where('job_id',$id)->exists();
@@ -171,7 +180,8 @@ class RegistrationController extends Controller
         return view('application_form',compact('job','user','application'));
     }
 
-    public function applicationStore(ApplicationRequest $request, $id){
+//求人応募処理
+    public function applicationStore(ApplicationRequest $request, int $id){
         
         $user = Auth::user();
 
@@ -187,7 +197,7 @@ class RegistrationController extends Controller
 
         $application ->save();
 
-        return redirect('home');
+        return redirect()->route('job.search')->with('status','応募が完了しました！');
 
     }
     
@@ -203,16 +213,33 @@ class RegistrationController extends Controller
     
 
     //求人応募内容編集
-    public function applicationDetail($id){
+    public function applicationDetail(int $id){
 
         $application  = Auth::user()->applications->where('id',$id)->first();
+
+        if(is_null($application)){
+            abort(404);
+        }
+
+        if ($application->user_id !== Auth::id()) {
+        abort(403, 'アクセス権限がありません。');
+        }
 
 
         return view('application_detail',compact('application'));
     }
+
     public function applicationUpdate(ApplicationRequest $request,int $id){
 
         $application  = Auth::user()->applications->where('id',$id)->first();
+
+        if(is_null($application)){
+            abort(404);
+        }
+
+        if ($application->user_id !== Auth::id()) {
+        abort(403, 'アクセス権限がありません。');
+        }
 
         $columns = ['motivation','email','tell'];
 
@@ -231,6 +258,14 @@ class RegistrationController extends Controller
         $user = Auth::user();
 
         $application = Application::where('id',$id)->where('user_id',$user->id)->first();
+
+        if(is_null($application)){
+            abort(404);
+        }
+
+        if ($application->user_id !== Auth::id()) {
+        abort(403, 'アクセス権限がありません。');
+        }
         
         $application->delete();
 
@@ -239,7 +274,7 @@ class RegistrationController extends Controller
 
     
     //求人ブックマーク機能
-    public function bookmark(Request $request, $id){
+    public function bookmark(Request $request, int $id){
 
         if (!Auth::check()) {
         return response()->json([
@@ -263,7 +298,7 @@ class RegistrationController extends Controller
         
 
     }
-    public function bookmarkCancel(Request $request, $id){
+    public function bookmarkCancel(Request $request, int $id){
         
         $user = Auth::user();
 
@@ -292,6 +327,10 @@ class RegistrationController extends Controller
     public function applicantList(int $id){
         $job = Job::find($id);
 
+        if(is_null($job)){
+            abort(404);
+        }
+
         $applications = Application::where('job_id',$job->id)->with('user')->get();
 
 
@@ -303,11 +342,18 @@ class RegistrationController extends Controller
 
         $application = Application::with('user', 'job')->find($id);
 
+        if(is_null($application)){
+            abort(404);
+        }
+
+        if ($application->job->user_id !== Auth::id()) {
+        abort(403, 'アクセス権限がありません。');
+        }
 
         return view('applicant_detail',compact('application'));
     }
 
-    public function  applicantEdit(Request $request, $id){
+    public function  applicantEdit(ApplicationStatus $request, int $id){
 
         $application = Application::find($id);
 

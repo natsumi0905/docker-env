@@ -123,7 +123,7 @@
                                 <form action="{{ route('softdelete.job',['job' => $job['id']]) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn btn-danger" onclick='return confirm("本当に削除しますか？")'>
-                                        {{ __('削除') }}
+                                        {{ __('求人削除') }}
                                     </button>
                                 </form>
                         </div>

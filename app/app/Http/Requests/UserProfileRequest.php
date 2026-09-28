@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplicationRequest extends FormRequest
+class UserProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,7 @@ class ApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'motivation'=>'required',
-            'tell'=>'required | digits_between:8,11',
-            'email'=>'required | email'
+            //
         ];
     }
 }

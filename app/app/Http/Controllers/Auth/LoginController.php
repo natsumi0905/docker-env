@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     public function authenticated(Request $request,$user){
         if($user->role==0){
-            return redirect('/home');
+            return redirect('/search');
         }
 
         if($user->role==1){
@@ -53,5 +53,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    protected function loggedOut(\Illuminate\Http\Request $request)
+    {
+        return redirect('/login');
     }
 }

@@ -71,12 +71,14 @@
                        })
                     }</script>
                     
-                </div>
+                </div> 
 
+              <div class="mt-3">
                 <div class ="text-center">
-                    <p>【業務内容】</p>
+                    <p class="fw-bold border-bottom pb-2">【仕事内容】</p>
                     <p>{{$job -> job_description}}</p>
                 </div>
+              </div>
             </div>
         </div>
     </div>

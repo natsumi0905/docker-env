@@ -32,7 +32,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 //一般ユーザー
 Route::middleware(['role:0'])->group(function(){
-    //ログイン時の画面移動
+    //マイページへ
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user_mypage');
     
     //マイページのプロフィール情報編集、表示と登録

@@ -6,7 +6,7 @@
     <div class="card mt-2">
         <div class="border p-4">
         @foreach($applications as $application)
-                <a href="{{route('application.detail',['id'=> $application->id])}}" class="card mb-3">
+                <a href="{{route('application.detail',['id'=> $application->id])}}" class="card mb-3 text-decoration-none">
                     <div class="text-center">
                         <div class="card-body">
                             <div class="row align-items-center ">
@@ -15,9 +15,9 @@
                            </div>
 
                            <div class ="col-md-7">
-                              <p>{{ $application->job->company_name}}</p>
-                              <h1>{{ $application->job->title}}</h1>
-                              <p>{{ $application->created_at }}｜{{ Config::get('application_status')[$application->status] }}</p>
+                              <p class="card-text">{{ $application->job->company_name}}</p>
+                              <h1 class="card-title">{{ $application->job->title}}</h1>
+                              <p class="card-text">{{ $application->created_at }}｜{{ Config::get('application_status')[$application->status] }}</p>
                            </div>
                        </div>
                         </div>
@@ -27,7 +27,7 @@
         </div>
     </div>
 </div>
-<div class="text-center">
+<div class="text-center mt-4">
     <a href="{{ route('user_mypage') }}">
        {{ __('マイページに戻る') }}
     </a>

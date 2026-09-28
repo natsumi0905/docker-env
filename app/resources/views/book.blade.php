@@ -6,7 +6,7 @@
     <div class="card mt-2">
         <div class="border p-4">
         @foreach($bookmarks as $bookmark)
-                <a href="{{route('job.detail',['id'=> $bookmark->job->id])}}" class="card mb-3">
+                <a href="{{route('job.detail',['id'=> $bookmark->job->id])}}" class="card mb-3 text-decoration-none">
                     <div class="text-center">
                         <div class="card-body">
                             <div class="row align-items-center ">
@@ -15,9 +15,9 @@
                            </div>
 
                            <div class ="col-md-7">
-                              <p>{{ $bookmark->job->user->company_name}}</p>
-                              <h1>{{ $bookmark ->job-> title}}</h1>
-                              <p>{{ Config::get('workplace_type')[$bookmark->job->location]}}｜{{ Config::get('employment_type')[$bookmark->job->employment_type] }}｜{{  Config::get('salary_type')[$bookmark->job->salary_range]  }}</p>
+                              <p class ="card-text">{{ $bookmark->job->user->company_name}}</p>
+                              <h1 class ="card-title">{{ $bookmark ->job-> title}}</h1>
+                              <p class ="card-text">{{ Config::get('workplace_type')[$bookmark->job->location]}}｜{{ Config::get('employment_type')[$bookmark->job->employment_type] }}｜{{  Config::get('salary_type')[$bookmark->job->salary_range]  }}</p>
                            </div>
                        </div>
                         </div>
@@ -26,7 +26,7 @@
         @endforeach
         </div>
     </div>
-    <div class="text-center">
+    <div class="text-center mt-4">
     <a href="{{ route('user_mypage') }}">
        {{ __('マイページに戻る') }}
     </a>

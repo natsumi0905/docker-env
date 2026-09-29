@@ -29,7 +29,7 @@
 <div class="container text-end">
 <div class="d-inline-flex focus-ring py-1 px-2 text-decoration-none border rounded-2 mb-3 ">   
     <a href="{{ route('user_mypage') }}" class="text-decoration-none">
-       <i class="bi bi-person-circle"></i>{{ __('マイページに戻る') }}
+       <i class="bi bi-person-circle"></i>{{ __('マイページ') }}
     </a>
 </div>
 

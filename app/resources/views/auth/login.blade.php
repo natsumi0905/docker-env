@@ -53,16 +53,14 @@
                                 @endif
 
                             </div>
-
-                            <div class=" row mt-3 text-center">
-
-                                    <a href="{{ route('job.search')}}">
-                                        ログインせずに求人を見る
-                                    </a>
-                            </div>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class=" row mt-3 text-center">
+                <a href="{{ route('job.search')}}">
+                    <i class="bi bi-arrow-left"></i>ログインせずに求人を見る
+                </a>
             </div>
         </div>
     </div>

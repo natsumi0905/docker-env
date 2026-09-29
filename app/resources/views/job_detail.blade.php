@@ -7,13 +7,13 @@
         <div class="card-body">
             <div class="row align-items-center ">
                 <div class="profile-picture col-md-4 ">
-                    <img class="img-fluid cursor_pointer" src="{{ $job['image'] }}" alt="Profile Picture">
+                    <img class="img-fluid cursor_pointer object-fit-cover border rounded" src="{{ $job['image'] }}" alt="Profile Picture">
                 </div>
 
                 <div class ="col-md-6">
-                    <p>{{ $job ->user->company_name }}</p>
-                    <h1>{{ $job -> title}}</h1>
-                    <p>{{ Config::get('workplace_type')[$job->location]}}｜{{ Config::get('employment_type')[$job->employment_type] }}｜{{Config::get('salary_type')[$job->salary_range]}}</p>
+                    <p class="card-text text-muted mb-2 bg-primary-subtle rounded-3 px-3 py-1 d-inline-block">{{ $job ->user->company_name }}</p>
+                    <h2>{{ $job -> title}}</h2>
+                    <p><i class="bi bi-geo-alt"></i>{{ Config::get('workplace_type')[$job->location]}}｜<i class="bi bi-person-fill"></i>{{ Config::get('employment_type')[$job->employment_type] }}｜<i class="bi bi-currency-yen"></i>{{Config::get('salary_type')[$job->salary_range]}}</p>
                 </div>
                 <div class="col-md-2 ">
                     @if ($bookmark)
@@ -75,7 +75,7 @@
 
               <div class="mt-3">
                 <div class ="text-center">
-                    <p class="fw-bold border-bottom pb-2">【仕事内容】</p>
+                    <p class="fw-bold border-bottom pb-2">【　仕事内容　】</p>
                     <p>{{$job -> job_description}}</p>
                 </div>
               </div>
@@ -85,12 +85,12 @@
 </div>
 <div class=" d-flex flex-column align-items-center ">
     <div class="mb-3">
-            <a href="{{ route('application.form',['id'=> $job->id]) }}"class="btn btn-primary">
-                {{ __('応募する') }}
+            <a href="{{ route('application.form',['id'=> $job->id]) }}"class="btn btn-primary btn-lg">
+                {{ __('応募する') }}　　　
             </a>
     </div>
             <a href="{{ route('job.search') }}">
-               {{ __('求人一覧に戻る') }}
+               <i class="bi bi-arrow-left "></i>{{ __('求人一覧に戻る') }}
             </a>
 </div>
 

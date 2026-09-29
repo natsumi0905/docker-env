@@ -6,9 +6,9 @@
     <div class="card mt-2 mb-3">
         <div class="border p-4">
                     <div class="text-center">
-                        <h1>{{ $application->job->title}}</h1>
+                        <h2>{{ $application->job->title}}</h2>
                         <div class="card-body">
-                              <p>{{ $application->user->name}}　|　{{ $application->user->email }}　|　{{ $application->user->tell }}　|　{{ $application->created_at }}</p>
+                              <p><i class="bi bi-person-fill"></i>{{ $application->user->name}}　|　<i class="bi bi-envelope"></i>{{ $application->user->email }}　|　<i class="bi bi-telephone-fill"></i>{{ $application->user->tell }}　|　<i class="bi bi-calendar"></i>{{ $application->created_at }}</p>
 
                        <div class="card mb-3 ">
                               <p>【自己PR】</p>
@@ -54,7 +54,7 @@
         <div class="text-center mt-2">
                 <div class="text-center">
                      <button type="submit" class="btn btn-primary">
-                        更新
+                        更新　　
                      </button>
                 </div>
         </div>
